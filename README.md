@@ -14,7 +14,6 @@
 #### Installation:
 1. Clone the repository to your machine
 2. Run `make` (takes a while).
-3. Add paths to your genome directories to your `local_config.json` file.
 
 #### Manual installation:
 1. Install required python packages by running: `pip install -r requirements.txt`.
