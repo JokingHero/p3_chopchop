@@ -1,0 +1,33 @@
+LOCUS       CHOPCHOP                 631 bp    DNA              UNK 01-JAN-1980
+DEFINITION  CHOPCHOP prediction for gene ENST00000607096, target 30.
+ACCESSION   ENST00000607096, locus 30
+VERSION     ENST00000607096, locus 30
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     Target          complement(290..340)
+     PRIMER_LEFT_0   199..220
+     PRIMER_RIGHT_0  466..487
+     PRIMER_LEFT_1   155..176
+     PRIMER_RIGHT_1  422..443
+     PRIMER_LEFT_2   198..219
+     PRIMER_RIGHT_2  466..487
+     PRIMER_LEFT_3   163..184
+     PRIMER_RIGHT_3  422..443
+     PRIMER_LEFT_4   163..184
+     PRIMER_RIGHT_4  425..446
+ORIGIN
+        1 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+       61 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnntt actcaatcat gtttcccgtc
+      121 tggtgacccc cgccagcttt ctcagaagtc cgggtgaaaa ccgaggagat tcatttacgg
+      181 caagcaacac agctcgtagg tttataaagg gatggggtgt aggaattcac gggcgcggtc
+      241 agccgagctc agaagcattg gattgcctaa ttgcgcgcgg taaatgcctt gcgaggctca
+      301 gctcgtagag cttgacactt gtggagagca tccactgtga cgaacaggtg ccagttgagg
+      361 aaccctcccc tggtggtgac gatggctcta caggcgtatg tgcaatgggc ctctcgacca
+      421 gatgccgctc tctccatact tactggggat ggcttagaaa ttttatagat acaaaaccgc
+      481 tcccactcgt acttttagta attcaggtgt tttggtagcc tataggtctg caattcgcta
+      541 gaggcccggg gaacctgccg atgagcaaga tcttgaactg gaacatcgcc ggtacctgat
+      601 tcggtcaacg gaggagccac ctgaattagc c
+//
