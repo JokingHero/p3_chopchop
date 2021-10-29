@@ -1,10 +1,10 @@
-from unittest import TestCase
+import unittest
+import tempfile
 
-from functions.evaluate import gc_content, compare_pam, perm_pam
+from functions.evaluate import gc_content, compare_pam, perm_pam, eval_talens_sequence
 from functions.set_default_modes import get_allowed_five_prime
 
-
-class Test(TestCase):
+class Test(unittest.TestCase):
     def test_gccontent(self):
         self.assertEqual(0.8260869565217391, gc_content("CCTCCTGCTGCGCGCGCGCTCCC"))
         self.assertEqual(1, gc_content("CCG"))
@@ -40,3 +40,14 @@ class Test(TestCase):
     def test_getAllowedFivePrime(self):
         self.assertEqual(("AA", "AC", "AG", "AT", "CA", "CC", "CG", "CT", "GA", "GC", "GG", "GT", "TA", "TC", "TG",
                           "TT"), get_allowed_five_prime("NN"))
+
+    def test_evalTalens(self):
+        trueTemp = tempfile.TemporaryFile(mode="wt")
+        falseTemp = tempfile.TemporaryFile(mode="wt")
+        self.assertTrue(eval_talens_sequence("x", 1, "TAT", 4, trueTemp, "A", "T"))
+        self.assertFalse(eval_talens_sequence("y", 1, "CGC", 2, falseTemp, "A", "T"))
+        trueTemp.close()
+        falseTemp.close()
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,7 +1,7 @@
 # ViennaRNA container must be built first, so we remove it from the list; then prepend it.
 DOCKER_BUILDS := vienna_rna $(filter-out vienna_rna,$(patsubst dockers/%/,%, $(dir $(wildcard dockers/*/Dockerfile))))
 
-all: create_local_config fetch_python_requirements build_dockers
+all: create_local_config fetch_python_requirements build_dockers run_tests
 
 create_local_config:
 	@echo "CREATING LOCAL CONFIG FILE"
@@ -14,5 +14,9 @@ fetch_python_requirements:
 build_docker_%:
 	@echo "BUILDING IMAGE '$*'"
 	docker build -t $* --force-rm dockers/$*/
+
+run_tests:
+	@echo "RUNNING TESTS"
+	python3 test.py
 
 build_dockers: $(addprefix build_docker_,$(DOCKER_BUILDS))
