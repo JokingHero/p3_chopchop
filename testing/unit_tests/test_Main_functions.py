@@ -1,4 +1,4 @@
-from unittest import TestCase
+import unittest
 
 from classes.ProgramMode import ProgramMode
 from constants import CPF1_DEFAULT, TALEN_DEFAULT, CRISPR_DEFAULT, NICKASE_DEFAULT
@@ -6,7 +6,7 @@ from functions.main_functions import mode_select
 from functions.set_default_modes import get_allowed_five_prime, get_mismatch_vectors, get_cpf1_mismatch_vectors
 
 
-class Test(TestCase):
+class Test(unittest.TestCase):
     def test_getAllowedFivePrime(self):
         self.assertEqual(("AA", "AC", "AG", "AT", "CA", "CC", "CG", "CT", "GA", "GC", "GG", "GT", "TA", "TC", "TG",
                           "TT"), get_allowed_five_prime("NN"))
@@ -65,3 +65,6 @@ class Test(TestCase):
         self.assertEqual(NICKASE_DEFAULT["MAX_MISMATCHES"], mode_select(None, "MAX_MISMATCHES", ProgramMode.NICKASE))
         self.assertEqual(NICKASE_DEFAULT["SCORE_GC"], mode_select(None, "SCORE_GC", ProgramMode.NICKASE))
         self.assertEqual(NICKASE_DEFAULT["SCORE_FOLDING"], mode_select(None, "SCORE_FOLDING", ProgramMode.NICKASE))
+
+if __name__ == "__main__":
+    unittest.main()
