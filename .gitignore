@@ -1,4 +1,4 @@
 config_local.json
 venv/
-.idea/
+.idea/*
 *.pyc
