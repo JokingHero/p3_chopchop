@@ -178,7 +178,7 @@ def generate_parser() -> argparse.ArgumentParser:
 
     parser.add_argument("-repairPredictions", "--repairPredictions",
                         type=str, default=None, dest="repair_predictions",
-                        choices=['mESC', 'U2OS', 'HEK293', 'HCT116', 'K562'],
+                        choices=['mESC', 'U2OS', 'HEK293', 'HCT116', 'K562','CROTON'],
                         help="Use inDelphi from Shen et al 2018 to predict repair profiles for every guideRNA, "
                              "this will make .repProfile and .repStats files")
 

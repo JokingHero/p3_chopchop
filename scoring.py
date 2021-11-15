@@ -20,6 +20,7 @@ from dockers.chari_2015_wrapper import run_chari_2015
 from dockers.kim_2018_wrapper import run_kim_2018
 from dockers.doench_2016_wrapper import run_doench_2016
 from dockers.inDelphi_wrapper import run_repair_prediction
+from dockers.li_2021_wrapper import run_croton_prediction
 from functions.TALEN_specific_functions import pair_talens, pair_cas9, cluster_pairs
 
 
@@ -131,7 +132,10 @@ def score_guides(guides: List[Guide], info: ScoringInfo) -> Tuple[List[Guide], i
                 guides = score_doench_2016(guides, info.scoring_method)
 
             if info.use_repair_predictions:
-                guides = run_repair_predictions(guides, info.repair_predictions)
+                if info.repair_predictions == "CROTON":
+                    guides = run_croton_predictions(guides, info.repair_predictions)
+                else:
+                    guides = run_repair_predictions(guides, info.repair_predictions)
 
     cluster = 0
     if info.program_mode in [ProgramMode.TALENS, ProgramMode.NICKASE]:
@@ -370,6 +374,11 @@ def run_repair_predictions(guides: List[Guide], repair_predictions: str) -> List
     logging.info("Running inDelphi repair predictions on %d guides" % len(guides))
 
     return run_repair_prediction(repair_predictions, guides)
+
+def run_croton_predictions(guides: List[Guide], repair_predictions: str) -> List[Guide]:
+    logging.info("Running CROTON repair predictions on %d guides" % len(guides))
+
+    return run_croton_prediction(repair_predictions, guides)
 
 
 def get_cluster_pairs(guides: List[Guide], info: ScoringInfo, program_mode: ProgramMode) -> Tuple[int, List[Guide]]:
