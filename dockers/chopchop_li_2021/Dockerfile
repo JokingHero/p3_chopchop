@@ -8,4 +8,4 @@ RUN pip install --upgrade pip \
 # Add script
 ADD . .
 
-ENTRYPOINT ["python", "./quickrun.py"]
+ENTRYPOINT ["python", "./run_croton_prediction.py"]
