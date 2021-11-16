@@ -373,7 +373,7 @@ def score_doench_2016(guides: List[Guide], scoring_method: ScoringMethod) -> Lis
 
 
 def run_repair_predictions(guides: List[Guide], repair_predictions: str) -> List[Guide]:
-    logging.info("Running inDelphi repair predictions on %d guides for %s cell type" % (len(guides),repair_predictions))
+    logging.info("Running inDelphi repair predictions on %d guides for %s cell type" % (len(guides), repair_predictions))
 
     return run_repair_prediction(repair_predictions, guides)
 

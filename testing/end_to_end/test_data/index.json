@@ -38,23 +38,28 @@
   },
     "repairPredictions_mESC": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions inDelphi",
-    "results": "10.bed"
+    "results": "10.bed",
+      "stats": "mESC_repStats.json"
   },
     "repairPredictions_U2OS": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions inDelphi -cellType U2OS",
-    "results": "11.bed"
+    "results": "11.bed",
+      "stats": "U2OS_repStats.json"
   },
     "repairPredictions_HEK293": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions inDelphi -cellType HEK293",
-    "results": "12.bed"
+    "results": "12.bed",
+      "stats": "HEK293_repStats.json"
   },
     "repairPredictions_HCT116": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions inDelphi -cellType HCT116",
-    "results": "13.bed"
+    "results": "13.bed",
+      "stats": "HCT116_repStats.json"
   },
     "repairPredictions_K562": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions inDelphi -cellType K562",
-    "results": "14.bed"
+    "results": "14.bed",
+      "stats": "K562_repStats.json"
   },
     "Isoforms": {
     "args": "-Target ENST00000607096 -G semirandom -GenBank -filterGCmin 20 -filterGCmax 80 -t CODING -n N -R 4 -a 20 --nonOverlapping -isoforms -g 27 -T 3 -M H",
@@ -78,6 +83,7 @@
   },
     "repairPredictions_CROTON": {
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions CROTON",
-    "results": "20.bed"
+    "results": "20.bed",
+      "stats": "croton_repStats.json"
   }
 }

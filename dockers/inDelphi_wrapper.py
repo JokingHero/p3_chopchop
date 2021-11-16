@@ -4,17 +4,7 @@ import subprocess
 
 import config
 from classes.Cas9 import Cas9
-
-
-def convert_cas9_to_tuple(key: int, guide: Cas9) -> (int, str, str, str, str, any, any):
-    return (key,
-            guide.downstream_5_prim,
-            guide.downstream_3_prim,
-            guide.stranded_guide_seq,
-            guide.pam,
-            guide.repair_profile,
-            guide.repair_stats)
-
+from dockers import Cas9Emulation as c9
 
 def run_repair_prediction(repair_prediction: str, guides: [Cas9]) -> [Cas9]:
     """
@@ -26,7 +16,7 @@ def run_repair_prediction(repair_prediction: str, guides: [Cas9]) -> [Cas9]:
     """
     keyed_tuples = []
     for key, guide in enumerate(guides):
-        keyed_tuples.append(convert_cas9_to_tuple(key, guide))
+        keyed_tuples.append(c9.convert_cas9_to_tuple(key, guide))
 
     encoded = codecs.encode(pickle.dumps(keyed_tuples, protocol=2), 'base64').decode()
 

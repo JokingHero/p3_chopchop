@@ -5,55 +5,12 @@ import codecs
 import pickle
 import pandas as pd
 
-from dockers import Cas9Emulation
+from dockers import Cas9Emulation as c9
 
 import numpy as np
 from tensorflow.keras.models import load_model
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--repairPrediction", choices=['mESC', 'U2OS', 'HEK293', 'HCT116', 'K562','CROTON'], required=True,
-                        help="The repair prediction type to run.")
-
-    return parser.parse_args()
-
-def recv_tuples():
-    """
-    Receives a Base64 encoded pickled list of tuples containing arguments for Cas9Emulation objects.
-
-    Source: https://stackoverflow.com/q/30469575
-
-    :return a list of tuples
-    """
-    pickled = sys.stdin.read()
-
-    tuples = pickle.loads(codecs.decode(pickled.encode(), 'base64'))
-
-    return tuples
-
-
-def tuple_to_cas9(t):
-    """
-    Takes a tuple containing all fields of the Cas9Emulation object and returns a Cas9Emulation object.
-
-    :param t: The tuple representation of a Cas9Emulation object.
-    :return: The corresponding Cas9Emulation object.
-    """
-    return Cas9Emulation.Cas9Emulation(*t)
-
-
-def cas9_to_reduced_tuple(guide):
-    """
-    Returns a reduced tuple containing only the key & modified values of the Cas9Emulation objects after running
-    repair prediction.
-
-    :param guide: The guide to reduce into a tuple.
-    :return: A tuple containing the inout guide's key, score
-    """
-    return guide.key, guide.repProfile, guide.repStats
-
-
-def run_croton_predictions(guides, repair_predictions):
+def run_croton_predictions(guides):
 
     model = load_model('models/CROTON.h5')  # load multitask model
 
@@ -112,19 +69,18 @@ def build_stats(pred):
 
 def main():
 
-    args = parse_args()
     guides = []
-    for t in recv_tuples():
-        guides.append(tuple_to_cas9(t))
+    for t in c9.recv_tuples():
+        guides.append(c9.tuple_to_cas9(t))
 
-    scored_guides = run_croton_predictions(guides, args.repairPrediction)
+    scored_guides = run_croton_predictions(guides)
 
     if not scored_guides:
         exit(1)
 
     tuples = []
     for guide in scored_guides:
-        tuples.append(cas9_to_reduced_tuple(guide))
+        tuples.append(c9.cas9_to_reduced_tuple(guide))
 
     # Encode & print the pickled tuples to STDOUT for the main script to catch.
     print(codecs.encode(pickle.dumps(tuples), 'base64').decode())
