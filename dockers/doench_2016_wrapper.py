@@ -37,8 +37,6 @@ def run_doench_2016(scoring_method: str, guides: [Cas9]) -> [Cas9]:
     # encoding='latin1' is for backwards compatibility.
     results = pickle.loads(codecs.decode(doench_2016.stdout.encode(), 'base64'), encoding='latin1')
 
-    # TODO currently we loop through key, guide pairs to set results, as we did for the keyed_tuples. We might want to
-    #  save keyed_tuple & guide relationships to be sure the different guides get the correct scores.
     for key, guide in enumerate(guides):
         for t in results:
             if t[0] == key:

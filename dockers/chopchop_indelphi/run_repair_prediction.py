@@ -4,7 +4,7 @@ import sys
 import codecs
 import pickle
 
-import Cas9Emulation
+from dockers import Cas9Emulation
 
 
 def parse_args():

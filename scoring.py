@@ -69,6 +69,7 @@ class ScoringInfo:
                  output_dir: str,
                  use_repair_predictions: bool = False,
                  repair_predictions: str = None,
+                 cell_type: str = None,
                  use_isoforms: bool = False,
                  vis_coords: List[Dict[str, Union[List[List[Union[int, str]]], List]]] = None,
                  use_fasta: bool = False,
@@ -83,6 +84,7 @@ class ScoringInfo:
         self.sort_fn = sort_fn
         self.use_repair_predictions = use_repair_predictions
         self.repair_predictions = repair_predictions
+        self.cell_type = cell_type
         self.use_isoforms = use_isoforms
         self.vis_coords = vis_coords
         self.use_fasta = use_fasta
@@ -134,8 +136,8 @@ def score_guides(guides: List[Guide], info: ScoringInfo) -> Tuple[List[Guide], i
             if info.use_repair_predictions:
                 if info.repair_predictions == "CROTON":
                     guides = run_croton_predictions(guides, info.repair_predictions)
-                else:
-                    guides = run_repair_predictions(guides, info.repair_predictions)
+                elif info.repair_predictions == "inDelphi":
+                    guides = run_repair_predictions(guides, info.cell_type)
 
     cluster = 0
     if info.program_mode in [ProgramMode.TALENS, ProgramMode.NICKASE]:
@@ -371,7 +373,7 @@ def score_doench_2016(guides: List[Guide], scoring_method: ScoringMethod) -> Lis
 
 
 def run_repair_predictions(guides: List[Guide], repair_predictions: str) -> List[Guide]:
-    logging.info("Running inDelphi repair predictions on %d guides" % len(guides))
+    logging.info("Running inDelphi repair predictions on %d guides for %s cell type" % (len(guides),repair_predictions))
 
     return run_repair_prediction(repair_predictions, guides)
 

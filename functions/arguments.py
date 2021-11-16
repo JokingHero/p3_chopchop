@@ -178,9 +178,15 @@ def generate_parser() -> argparse.ArgumentParser:
 
     parser.add_argument("-repairPredictions", "--repairPredictions",
                         type=str, default=None, dest="repair_predictions",
-                        choices=['mESC', 'U2OS', 'HEK293', 'HCT116', 'K562','CROTON'],
-                        help="Use inDelphi from Shen et al 2018 to predict repair profiles for every guideRNA, "
+                        choices=['inDelphi','CROTON'],
+                        help="Use inDelphi from Shen et al 2018 or CROTON from Li, Zheng, and Troyanskaya 2021 "
+                             "to predict repair profiles for every guideRNA, "
                              "this will make .repProfile and .repStats files")
+
+    parser.add_argument("-cellType", "--cellType",
+                        type=str, default="mESC", dest="cell_type",
+                        choices=['mESC','U2OS', 'HEK293', 'HCT116','K562'],
+                        help="Specify cell type as required by inDelphi repair predictions.")
 
     parser.add_argument("-rm1perfOff", "--rm1perfOff",
                         default=False, action="store_true", dest="rm_1_perf_off",

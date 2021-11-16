@@ -277,7 +277,7 @@ def main():
                                        args.off_target_max_dist)
 
     info = scoring.ScoringInfo(args.genome, args.pam, strand, sort_output, cluster_info, args.output_dir,
-                               args.repair_predictions is not None, args.repair_predictions, args.isoforms,
+                               args.repair_predictions is not None, args.repair_predictions, args.cell_type, args.isoforms,
                                vis_coords, args.fasta, args.rm_1_perf_off, args.program_mode, scoring_method)
     sorted_output, cluster = scoring.score_guides(results, info)
 

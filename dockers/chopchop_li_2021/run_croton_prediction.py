@@ -5,7 +5,7 @@ import codecs
 import pickle
 import pandas as pd
 
-import Cas9Emulation
+from dockers import Cas9Emulation
 
 import numpy as np
 from tensorflow.keras.models import load_model
