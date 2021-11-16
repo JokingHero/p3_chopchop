@@ -4,7 +4,7 @@ import sys
 import codecs
 import pickle
 
-import Cas9Emulation
+from dockers import Cas9Emulation as c9
 
 
 def parse_args():
@@ -14,7 +14,7 @@ def parse_args():
 
     return parser.parse_args()
 
-
+'''
 def recv_tuples():
     """
     Receives a Base64 encoded pickled list of tuples containing arguments for Cas9Emulation objects.
@@ -49,7 +49,7 @@ def cas9_to_reduced_tuple(guide):
     :return: A tuple containing the inout guide's key, score
     """
     return guide.key, guide.repProfile, guide.repStats
-
+'''
 
 def run_repair_predictions(guides, repair_predictions):
     sys.path.append("inDelphi/")
@@ -85,8 +85,8 @@ def run_repair_predictions(guides, repair_predictions):
 def main():
     args = parse_args()
     guides = []
-    for t in recv_tuples():
-        guides.append(tuple_to_cas9(t))
+    for t in c9.recv_tuples():
+        guides.append(c9.tuple_to_cas9(t))
 
     scored_guides = run_repair_predictions(guides, args.repairPrediction)
 
@@ -96,7 +96,7 @@ def main():
 
     tuples = []
     for guide in scored_guides:
-        tuples.append(cas9_to_reduced_tuple(guide))
+        tuples.append(c9.cas9_to_reduced_tuple(guide))
 
     # Encode & print the pickled tuples to STDOUT for the main script to catch.
     print codecs.encode(pickle.dumps(tuples), 'base64').decode()

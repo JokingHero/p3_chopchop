@@ -37,8 +37,6 @@ def run_chari_2015(guides: [Cas9], info) -> [Cas9]:
     # encoding='latin1' is for backwards compatibility.
     results = pickle.loads(codecs.decode(chari_2015.stdout.encode(), 'base64'), encoding='latin1')
 
-    # TODO currently we loop through key, guide pairs to set results, as we did for the keyed_tuples. We might want to
-    #  save keyed_tuple & guide relationships to be sure the different guides get the correct scores.
     for key, guide in enumerate(guides):
         for t in results:
             if t[0] == key:

@@ -16,7 +16,12 @@ def main():
                 + info['args'].split(' '), capture_output=True, cwd='../../', check=True)
             # print(result.stdout.decode())
             if filecmp.cmp('temp/results.bed', "test_data/" + info['results']):
-                print(f"\r'{name}'\tSUCCESS: Output matches.")
+                print(f"\r'{name}'\tSUCCESS: Outputs match.")
+                if 'stats' in info:
+                    if filecmp.cmp('temp/1_repStats.json', "test_data/" + info['stats']):
+                        print(f"\r'{name}'\tSUCCESS: Stats output matches.")
+                    else:
+                        print(f"\r'{name}'\tERROR: Stat output does not match.")
             else:
                 print(f"\r'{name}'\tERROR: Output does not match.")
         except subprocess.CalledProcessError as e:
