@@ -2,9 +2,9 @@ import codecs
 import pickle
 import subprocess
 
-import config
 from classes.Cas9 import Cas9
-from dockers import Cas9Emulation as c9
+from dockers.cas9_converter import convert_cas9_to_tuple
+
 
 def run_repair_prediction(repair_prediction: str, guides: [Cas9]) -> [Cas9]:
     """
@@ -16,7 +16,7 @@ def run_repair_prediction(repair_prediction: str, guides: [Cas9]) -> [Cas9]:
     """
     keyed_tuples = []
     for key, guide in enumerate(guides):
-        keyed_tuples.append(c9.convert_cas9_to_tuple(key, guide))
+        keyed_tuples.append(convert_cas9_to_tuple(key, guide))
 
     encoded = codecs.encode(pickle.dumps(keyed_tuples, protocol=2), 'base64').decode()
 

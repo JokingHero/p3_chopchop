@@ -21,6 +21,7 @@ from dockers.kim_2018_wrapper import run_kim_2018
 from dockers.doench_2016_wrapper import run_doench_2016
 from dockers.inDelphi_wrapper import run_repair_prediction
 from dockers.li_2021_wrapper import run_croton_prediction
+from dockers.allen_2018_wrapper import run_forecast_prediction
 from functions.TALEN_specific_functions import pair_talens, pair_cas9, cluster_pairs
 
 
@@ -75,7 +76,8 @@ class ScoringInfo:
                  use_fasta: bool = False,
                  rm1_perf_off: bool = False,
                  program_mode: ProgramMode = ProgramMode.CRISPR,
-                 scoring_method: ScoringMethod = ScoringMethod.G_20):
+                 scoring_method: ScoringMethod = ScoringMethod.G_20,
+                 from_test: bool = False):
         self.genome = genome
         self.pam = pam
         self.strand = strand
@@ -91,6 +93,7 @@ class ScoringInfo:
         self.rm1_perf_off = rm1_perf_off
         self.program_mode = program_mode
         self.scoring_method = scoring_method
+        self.from_test = from_test
 
 
 def score_guides(guides: List[Guide], info: ScoringInfo) -> Tuple[List[Guide], int]:
@@ -135,9 +138,11 @@ def score_guides(guides: List[Guide], info: ScoringInfo) -> Tuple[List[Guide], i
 
             if info.use_repair_predictions:
                 if info.repair_predictions == "CROTON":
-                    guides = run_croton_predictions(guides, info.repair_predictions)
+                    guides = run_croton_predictions(guides)
                 elif info.repair_predictions == "inDelphi":
                     guides = run_repair_predictions(guides, info.cell_type)
+                elif info.repair_predictions == "FORECasT":
+                    guides = run_forecast_predictions(guides, info.from_test)
 
     cluster = 0
     if info.program_mode in [ProgramMode.TALENS, ProgramMode.NICKASE]:
@@ -377,10 +382,15 @@ def run_repair_predictions(guides: List[Guide], repair_predictions: str) -> List
 
     return run_repair_prediction(repair_predictions, guides)
 
-def run_croton_predictions(guides: List[Guide], repair_predictions: str) -> List[Guide]:
+def run_croton_predictions(guides: List[Guide]) -> List[Guide]:
     logging.info("Running CROTON repair predictions on %d guides" % len(guides))
 
-    return run_croton_prediction(repair_predictions, guides)
+    return run_croton_prediction(guides)
+
+def run_forecast_predictions(guides: List[Guide], from_test: bool) -> List[Guide]:
+    logging.info("Running FORECasT repair predictions on %d guides" % len(guides))
+
+    return run_forecast_prediction(from_test, guides)
 
 
 def get_cluster_pairs(guides: List[Guide], info: ScoringInfo, program_mode: ProgramMode) -> Tuple[int, List[Guide]]:

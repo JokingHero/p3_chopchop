@@ -4,7 +4,7 @@ import sys
 import codecs
 import pickle
 
-from dockers import Cas9Emulation as c9
+import Cas9Emulation as c9
 
 
 def parse_args():
@@ -49,8 +49,8 @@ def cas9_to_reduced_tuple(guide):
     :return: A tuple containing the inout guide's key, score
     """
     return guide.key, guide.repProfile, guide.repStats
-'''
 
+'''
 def run_repair_predictions(guides, repair_predictions):
     sys.path.append("inDelphi/")
 

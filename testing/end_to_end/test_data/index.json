@@ -85,5 +85,10 @@
     "args": "-Target ENST00000607096 -G semirandom -repairPredictions CROTON",
     "results": "20.bed",
       "stats": "croton_repStats.json"
+  },
+    "repairPredictions_FORECasT": {
+    "args": "-Target ENST00000607096 -G semirandom -repairPredictions FORECasT --fromTest",
+    "results": "21.bed",
+      "stats": "forecast_repStats.json"
   }
 }

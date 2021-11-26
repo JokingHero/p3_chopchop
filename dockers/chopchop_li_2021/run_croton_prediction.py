@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-import argparse
+import os
 import sys
 import codecs
 import pickle
 import pandas as pd
 
-from dockers import Cas9Emulation as c9
+import Cas9Emulation as c9
 
 import numpy as np
 from tensorflow.keras.models import load_model
 
+
 def run_croton_predictions(guides):
 
-    model = load_model('models/CROTON.h5')  # load multitask model
+    model = load_model('dockers/chopchop_li_2021/models/CROTON.h5')  # load multitask model
 
     for i, guide in enumerate(guides):
         try:
@@ -68,7 +69,6 @@ def build_stats(pred):
     return stats
 
 def main():
-
     guides = []
     for t in c9.recv_tuples():
         guides.append(c9.tuple_to_cas9(t))

@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+
+  srv1:
+    build:
+      dockerfile: dockers/chopchop_allen_2018/Dockerfile
+      context: ./
+
+    image: chopchop_allen_2018
