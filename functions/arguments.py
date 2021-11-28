@@ -233,9 +233,9 @@ def generate_parser() -> argparse.ArgumentParser:
                         dest="log_level",
                         help="Set logging level.")
 
-    parser.add_argument("--fromTest",
-                        default=False, action="store_true", dest="from_test",
-                        help="Set tester variable to improve testing speed")
+    parser.add_argument("--isTest",
+                        default=False, action="store_true", dest="is_test",
+                        help="Indicates a test run, improves speed when testing slow ML models")
 
 
     return parser

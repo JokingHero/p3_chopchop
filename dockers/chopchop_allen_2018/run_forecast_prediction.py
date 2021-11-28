@@ -10,12 +10,12 @@ from indel_prediction.predictor import predict
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-fromTest", required=False,
-                        help="Indicating if testrun.")
+    parser.add_argument("-isTest", required=False,
+                        help="Indicates testrun.")
 
     return parser.parse_args()
 
-def run_forecast_predictions(guides, fromTest):
+def run_forecast_predictions(guides, isTest):
 
     for i, guide in enumerate(guides):
         try:
@@ -35,7 +35,7 @@ def run_forecast_predictions(guides, fromTest):
 
             guide.repProfile = json.dumps(pred_dict)
             guide.repStats = {"Frameshift frequency":100-pred_stats}
-            if fromTest == "True" and i == 1:
+            if isTest == "True":
                 break
 
         except ValueError:
@@ -50,7 +50,7 @@ def main():
     for t in c9.recv_tuples():
         guides.append(c9.tuple_to_cas9(t))
 
-    scored_guides = run_forecast_predictions(guides, args.fromTest)
+    scored_guides = run_forecast_predictions(guides, args.isTest)
 
     if not scored_guides:
         exit(1)

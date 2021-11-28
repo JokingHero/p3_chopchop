@@ -3,17 +3,9 @@ import pickle
 import subprocess
 
 from classes.Cas9 import Cas9
+from dockers.cas9_converter import convert_cas9_to_tuple
 
-def convert_cas9_to_tuple(key: int, guide: Cas9) -> (int, str, str, str, str, any, any):
-    return (key,
-            guide.downstream_5_prim,
-            guide.downstream_3_prim,
-            guide.stranded_guide_seq,
-            guide.pam,
-            guide.repair_profile,
-            guide.repair_stats)
-
-def run_forecast_prediction(from_test: bool, guides: [Cas9]) -> [Cas9]:
+def run_forecast_prediction(is_test: bool, guides: [Cas9]) -> [Cas9]:
     """
     Runs chopchop_li_2021 docker image using the supplied guides & repair prediction mode.
 
@@ -29,7 +21,7 @@ def run_forecast_prediction(from_test: bool, guides: [Cas9]) -> [Cas9]:
 
     decoded = pickle.loads(codecs.decode(encoded.encode(), 'base64'))
 
-    command = ['docker', 'run', '-i', 'chopchop_allen_2018', '-fromTest',str(from_test)]
+    command = ['docker', 'run', '-i', 'chopchop_allen_2018', '-isTest', str(is_test)]
 
     repair_prediction = subprocess.run(command, capture_output=True, text=True, input=encoded)
 
@@ -39,6 +31,6 @@ def run_forecast_prediction(from_test: bool, guides: [Cas9]) -> [Cas9]:
     for key, guide in enumerate(guides):
         for t in results:
             if t[0] == key:
-                _,guide.repair_profile, guide.repair_stats = t
+                _, guide.repair_profile, guide.repair_stats = t
 
     return guides

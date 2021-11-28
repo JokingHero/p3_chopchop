@@ -278,7 +278,7 @@ def main():
 
     info = scoring.ScoringInfo(args.genome, args.pam, strand, sort_output, cluster_info, args.output_dir,
                                args.repair_predictions is not None, args.repair_predictions, args.cell_type, args.isoforms,
-                               vis_coords, args.fasta, args.rm_1_perf_off, args.program_mode, scoring_method, args.from_test)
+                               vis_coords, args.fasta, args.rm_1_perf_off, args.program_mode, scoring_method, args.is_test)
     sorted_output, cluster = scoring.score_guides(results, info)
 
     # Write individual results to file

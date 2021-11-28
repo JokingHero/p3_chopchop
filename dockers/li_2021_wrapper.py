@@ -32,6 +32,6 @@ def run_croton_prediction(guides: [Cas9]) -> [Cas9]:
     for key, guide in enumerate(guides):
         for t in results:
             if t[0] == key:
-                _,guide.repair_profile, guide.repair_stats = t
+                _, guide.repair_profile, guide.repair_stats = t
 
     return guides
