@@ -1,13 +1,7 @@
-from classes.Cas9 import Cas9
 
-def convert_cas9_to_tuple(key: int, guide: Cas9) -> (int, str, str, str, str, any, any):
-    return (key,
-            guide.downstream_5_prim,
-            guide.downstream_3_prim,
-            guide.stranded_guide_seq,
-            guide.pam,
-            guide.repair_profile,
-            guide.repair_stats)
+import sys
+import pickle
+import codecs
 
 def recv_tuples():
     """
@@ -30,7 +24,9 @@ def tuple_to_cas9(t):
     :param t: The tuple representation of a Cas9Emulation object.
     :return: The corresponding Cas9Emulation object.
     """
-    return Cas9Emulation.Cas9Emulation(*t)
+
+    return Cas9Emulation(*t)#Cas9Emulation.Cas9Emulation(*t)
+
 
 def cas9_to_reduced_tuple(guide):
     """

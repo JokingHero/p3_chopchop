@@ -178,8 +178,9 @@ def generate_parser() -> argparse.ArgumentParser:
 
     parser.add_argument("-repairPredictions", "--repairPredictions",
                         type=str, default=None, dest="repair_predictions",
-                        choices=['inDelphi','CROTON'],
-                        help="Use inDelphi from Shen et al 2018 or CROTON from Li, Zheng, and Troyanskaya 2021 "
+                        choices=['inDelphi','CROTON', 'FORECasT'],
+                        help="Use inDelphi from Shen et al 2018, CROTON from Li, Zheng, and Troyanskaya 2021, "
+                             "or FORECasT from Allen et al 2018."
                              "to predict repair profiles for every guideRNA, "
                              "this will make .repProfile and .repStats files")
 
@@ -231,6 +232,11 @@ def generate_parser() -> argparse.ArgumentParser:
                         type=str, default="ERROR", choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         dest="log_level",
                         help="Set logging level.")
+
+    parser.add_argument("--isTest",
+                        default=False, action="store_true", dest="is_test",
+                        help="Indicates a test run, improves speed when testing slow ML models")
+
 
     return parser
 

@@ -3,6 +3,7 @@ import logging
 import re
 import sys
 import warnings
+import pandas as pd
 from subprocess import Popen, PIPE
 
 from Bio import SeqIO
@@ -168,6 +169,10 @@ def write_individual_results(output_dir: str, max_off_targets: int, sorted_outpu
 
             if guide.repair_profile is not None:
                 profile_file = f"{output_dir}/{guide.id}_repProfile.csv"
+                if type(guide.repair_profile) == str:
+                    frame = pd.DataFrame(json.loads(guide.repair_profile).items(), columns=["target", "fraction"])
+                    frame = frame.sort_values(by=['fraction'], ascending=False)
+                    guide.repair_profile = frame
                 guide.repair_profile.to_csv(profile_file, index=False)
 
             if off_targets_table:
