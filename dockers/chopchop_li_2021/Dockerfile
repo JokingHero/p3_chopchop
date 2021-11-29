@@ -11,3 +11,4 @@ COPY dockers/Cas9Emulation.py .
 ENV PYTHONPATH .
 
 ENTRYPOINT ["python","./dockers/chopchop_li_2021/run_croton_prediction.py"]
+

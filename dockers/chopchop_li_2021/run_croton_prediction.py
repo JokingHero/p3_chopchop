@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import os
 import sys
 import codecs
@@ -6,6 +7,7 @@ import pickle
 import pandas as pd
 
 import Cas9Emulation as c9
+
 
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -69,6 +71,7 @@ def build_stats(pred):
     return stats
 
 def main():
+
     guides = []
     for t in c9.recv_tuples():
         guides.append(c9.tuple_to_cas9(t))

@@ -5,7 +5,6 @@ import subprocess
 from classes.Cas9 import Cas9
 from dockers.cas9_converter import convert_cas9_to_tuple
 
-
 def run_repair_prediction(repair_prediction: str, guides: [Cas9]) -> [Cas9]:
     """
     Runs chopchop_inDelphi docker image using the supplied guides & repair prediction mode.

@@ -7,6 +7,7 @@ import pickle
 import Cas9Emulation as c9
 
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--repairPrediction", choices=['mESC', 'U2OS', 'HEK293', 'HCT116', 'K562'], required=True,
@@ -14,43 +15,6 @@ def parse_args():
 
     return parser.parse_args()
 
-'''
-def recv_tuples():
-    """
-    Receives a Base64 encoded pickled list of tuples containing arguments for Cas9Emulation objects.
-
-    Source: https://stackoverflow.com/q/30469575
-
-    :return a list of tuples
-    """
-    pickled = sys.stdin.read()
-
-    tuples = pickle.loads(codecs.decode(pickled.encode(), 'base64'))
-
-    return tuples
-
-
-def tuple_to_cas9(t):
-    """
-    Takes a tuple containing all fields of the Cas9Emulation object and returns a Cas9Emulation object.
-
-    :param t: The tuple representation of a Cas9Emulation object.
-    :return: The corresponding Cas9Emulation object.
-    """
-    return Cas9Emulation.Cas9Emulation(*t)
-
-
-def cas9_to_reduced_tuple(guide):
-    """
-    Returns a reduced tuple containing only the key & modified values of the Cas9Emulation objects after running
-    repair prediction.
-
-    :param guide: The guide to reduce into a tuple.
-    :return: A tuple containing the inout guide's key, score
-    """
-    return guide.key, guide.repProfile, guide.repStats
-
-'''
 def run_repair_predictions(guides, repair_predictions):
     sys.path.append("inDelphi/")
 

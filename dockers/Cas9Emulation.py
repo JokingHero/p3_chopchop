@@ -1,3 +1,4 @@
+
 import sys
 import pickle
 import codecs
@@ -23,7 +24,9 @@ def tuple_to_cas9(t):
     :param t: The tuple representation of a Cas9Emulation object.
     :return: The corresponding Cas9Emulation object.
     """
+
     return Cas9Emulation(*t)#Cas9Emulation.Cas9Emulation(*t)
+
 
 def cas9_to_reduced_tuple(guide):
     """

@@ -6,6 +6,7 @@ from classes.Cas9 import Cas9
 from dockers.cas9_converter import convert_cas9_to_tuple
 
 def run_croton_prediction(guides: [Cas9]) -> [Cas9]:
+
     """
     Runs chopchop_li_2021 docker image using the supplied guides & repair prediction mode.
 
@@ -33,5 +34,6 @@ def run_croton_prediction(guides: [Cas9]) -> [Cas9]:
         for t in results:
             if t[0] == key:
                 _, guide.repair_profile, guide.repair_stats = t
+
 
     return guides
